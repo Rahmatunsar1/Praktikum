@@ -277,9 +277,9 @@ PLOTLY_TEMPLATE = dict(
 # HELPER FUNCTIONS
 # ─────────────────────────────────────────────
 
-@st.cache_data(show_spinner=False)
-def load_and_preprocess():
-    df = pd.read_csv("netflix_titles.csv")
+def load_and_preprocess(uploaded_bytes):
+    import io
+    df = pd.read_csv(io.BytesIO(uploaded_bytes))
     df.dropna(subset=["listed_in"], inplace=True)
     df["genres"] = df["listed_in"].apply(lambda x: [g.strip() for g in x.split(",")])
     df["date_added"] = pd.to_datetime(df["date_added"], errors="coerce")
@@ -287,7 +287,7 @@ def load_and_preprocess():
     df["country_clean"] = df["country"].fillna("Unknown").apply(lambda x: x.split(",")[0].strip())
     df["description"] = df["description"].fillna("")
     return df
-
+    
 @st.cache_data(show_spinner=False)
 def run_kmeans(df, n_clusters):
     mlb = MultiLabelBinarizer()
