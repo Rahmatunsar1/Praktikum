@@ -277,9 +277,9 @@ PLOTLY_TEMPLATE = dict(
 # HELPER FUNCTIONS
 # ─────────────────────────────────────────────
 
-def load_and_preprocess(uploaded_bytes):
-    import io
-    df = pd.read_csv(io.BytesIO(uploaded_bytes))
+@st.cache_data(show_spinner=False)
+def load_and_preprocess():
+    df = pd.read_csv("netflix_titles.csv")
     df.dropna(subset=["listed_in"], inplace=True)
     df["genres"] = df["listed_in"].apply(lambda x: [g.strip() for g in x.split(",")])
     df["date_added"] = pd.to_datetime(df["date_added"], errors="coerce")
@@ -345,12 +345,8 @@ with st.sidebar:
 
     st.divider()
 
-    st.markdown("### Upload Dataset")
-    uploaded = st.file_uploader(
-        "Upload file CSV Netflix",
-        type=["csv"],
-        help="Format CSV dengan kolom: show_id, type, title, listed_in, dll."
-    )
+    st.markdown("### Dataset")
+    st.success("Dataset netflix_titles.csv dimuat otomatis dari repository GitHub.")
 
     st.divider()
 
@@ -385,22 +381,9 @@ st.markdown("""
 # ─────────────────────────────────────────────
 # MAIN LOGIC
 # ─────────────────────────────────────────────
-if uploaded is None:
-    st.markdown("""
-    <div style="text-align:center; padding:80px 20px;">
-        <div style="margin-bottom:16px;"><span class="real-icon-play"></span></div>
-        <h3 style="color:#E50914; font-size:1.5rem;">Upload Dataset untuk Memulai</h3>
-        <p style="color:#888; max-width:500px; margin:0 auto;">
-            Upload file <b style="color:#f0f0f0;">netflix_titles.csv</b> pada panel kiri, 
-            lalu tekan <b style="color:#E50914;">Jalankan Analisis</b> untuk melihat hasil clustering genre.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    st.stop()
-
-# Load data
+# Load data otomatis dari file netflix_titles.csv di repository
 with st.spinner("Memuat dan memproses dataset..."):
-    df_raw = load_and_preprocess(uploaded.read())
+    df_raw = load_and_preprocess()
 
 # Apply content filter
 if content_filter == "Movie":
