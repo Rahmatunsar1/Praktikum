@@ -198,9 +198,6 @@ st.markdown("""
         transform: translateY(-1px);
     }
 
-    .stSelectbox > div > div, .stSlider {
-        color: #f0f0f0 !important;
-    }
 
     /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
@@ -251,6 +248,173 @@ st.markdown("""
 
     /* Table  */
     .stDataFrame { border-radius: 10px; overflow: hidden; }
+
+
+    /* =======================================================
+       FIX FILTER, SELECTBOX, MULTISELECT, TEXT INPUT, DROPDOWN
+       Supaya teks pilihan tidak putih di atas background putih
+       ======================================================= */
+
+    /* Label semua input */
+    label,
+    .stSelectbox label,
+    .stMultiSelect label,
+    .stTextInput label,
+    .stSlider label,
+    .stFileUploader label {
+        color: #f0f0f0 !important;
+        font-weight: 600 !important;
+    }
+
+    /* Kotak selectbox dan multiselect */
+    div[data-baseweb="select"] > div,
+    .stSelectbox div[data-baseweb="select"] > div,
+    .stMultiSelect div[data-baseweb="select"] > div {
+        background-color: #111111 !important;
+        color: #f0f0f0 !important;
+        border: 1px solid #E50914 !important;
+        border-radius: 8px !important;
+        min-height: 42px !important;
+        box-shadow: none !important;
+    }
+
+    /* Semua teks di dalam selectbox */
+    div[data-baseweb="select"] *,
+    .stSelectbox div[data-baseweb="select"] *,
+    .stMultiSelect div[data-baseweb="select"] * {
+        color: #f0f0f0 !important;
+        -webkit-text-fill-color: #f0f0f0 !important;
+    }
+
+    /* Input internal selectbox */
+    div[data-baseweb="select"] input,
+    .stSelectbox input,
+    .stMultiSelect input {
+        color: #f0f0f0 !important;
+        -webkit-text-fill-color: #f0f0f0 !important;
+    }
+
+    /* Placeholder */
+    div[data-baseweb="select"] input::placeholder,
+    .stTextInput input::placeholder {
+        color: #bdbdbd !important;
+        -webkit-text-fill-color: #bdbdbd !important;
+        opacity: 1 !important;
+    }
+
+    /* Dropdown/popover ketika selectbox dibuka */
+    div[data-baseweb="popover"],
+    div[data-baseweb="popover"] > div,
+    div[data-baseweb="menu"],
+    ul[role="listbox"] {
+        background-color: #111111 !important;
+        color: #f0f0f0 !important;
+        border: 1px solid #E50914 !important;
+        border-radius: 8px !important;
+    }
+
+    /* Teks pilihan di dropdown */
+    div[data-baseweb="popover"] *,
+    div[data-baseweb="menu"] *,
+    ul[role="listbox"] *,
+    li[role="option"],
+    div[role="option"] {
+        color: #f0f0f0 !important;
+        -webkit-text-fill-color: #f0f0f0 !important;
+    }
+
+    /* Item pilihan dropdown */
+    li[role="option"],
+    div[role="option"] {
+        background-color: #111111 !important;
+        color: #f0f0f0 !important;
+    }
+
+    /* Hover pilihan dropdown */
+    li[role="option"]:hover,
+    div[role="option"]:hover,
+    ul[role="listbox"] li:hover {
+        background-color: #E50914 !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
+
+    /* Pilihan aktif */
+    li[aria-selected="true"],
+    div[aria-selected="true"],
+    li[role="option"][aria-selected="true"],
+    div[role="option"][aria-selected="true"] {
+        background-color: #8B0000 !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
+
+    /* Tag pilihan pada multiselect */
+    span[data-baseweb="tag"],
+    div[data-baseweb="tag"] {
+        background-color: #E50914 !important;
+        color: #ffffff !important;
+        border-radius: 8px !important;
+    }
+    span[data-baseweb="tag"] *,
+    div[data-baseweb="tag"] * {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
+
+    /* Text input pencarian */
+    .stTextInput input {
+        background-color: #111111 !important;
+        color: #f0f0f0 !important;
+        -webkit-text-fill-color: #f0f0f0 !important;
+        border: 1px solid #E50914 !important;
+        border-radius: 8px !important;
+    }
+
+    /* File uploader */
+    [data-testid="stFileUploader"] section {
+        background-color: #111111 !important;
+        border: 1px dashed #E50914 !important;
+        border-radius: 10px !important;
+        color: #f0f0f0 !important;
+    }
+    [data-testid="stFileUploader"] section * {
+        color: #f0f0f0 !important;
+    }
+    [data-testid="stFileUploader"] button {
+        background-color: #E50914 !important;
+        color: #ffffff !important;
+        border: none !important;
+    }
+
+    /* Slider */
+    .stSlider,
+    .stSlider * {
+        color: #f0f0f0 !important;
+    }
+    .stSlider [data-baseweb="slider"] div {
+        color: #f0f0f0 !important;
+    }
+
+    /* Info, success, warning text tetap terbaca */
+    [data-testid="stAlert"] {
+        background-color: rgba(26,26,26,0.95) !important;
+        border: 1px solid rgba(229,9,20,0.35) !important;
+        color: #f0f0f0 !important;
+    }
+    [data-testid="stAlert"] * {
+        color: #f0f0f0 !important;
+    }
+
+    /* Download button */
+    .stDownloadButton > button {
+        background: linear-gradient(135deg, #E50914, #b00710) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 8px !important;
+        font-weight: 700 !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -278,8 +442,9 @@ PLOTLY_TEMPLATE = dict(
 # ─────────────────────────────────────────────
 
 @st.cache_data(show_spinner=False)
-def load_and_preprocess():
-    df = pd.read_csv("netflix_titles.csv")
+def load_and_preprocess(uploaded_bytes):
+    import io
+    df = pd.read_csv(io.BytesIO(uploaded_bytes))
     df.dropna(subset=["listed_in"], inplace=True)
     df["genres"] = df["listed_in"].apply(lambda x: [g.strip() for g in x.split(",")])
     df["date_added"] = pd.to_datetime(df["date_added"], errors="coerce")
@@ -287,7 +452,8 @@ def load_and_preprocess():
     df["country_clean"] = df["country"].fillna("Unknown").apply(lambda x: x.split(",")[0].strip())
     df["description"] = df["description"].fillna("")
     return df
-    
+
+
 @st.cache_data(show_spinner=False)
 def run_kmeans(df, n_clusters):
     mlb = MultiLabelBinarizer()
@@ -345,8 +511,12 @@ with st.sidebar:
 
     st.divider()
 
-    st.markdown("### Dataset")
-    st.success("Dataset netflix_titles.csv dimuat otomatis dari repository GitHub.")
+    st.markdown("### Upload Dataset")
+    uploaded = st.file_uploader(
+        "Upload file CSV Netflix",
+        type=["csv"],
+        help="Format CSV dengan kolom: show_id, type, title, listed_in, dll."
+    )
 
     st.divider()
 
@@ -381,9 +551,22 @@ st.markdown("""
 # ─────────────────────────────────────────────
 # MAIN LOGIC
 # ─────────────────────────────────────────────
-# Load data otomatis dari file netflix_titles.csv di repository
+if uploaded is None:
+    st.markdown("""
+    <div style="text-align:center; padding:80px 20px;">
+        <div style="margin-bottom:16px;"><span class="real-icon-play"></span></div>
+        <h3 style="color:#E50914; font-size:1.5rem;">Upload Dataset untuk Memulai</h3>
+        <p style="color:#888; max-width:500px; margin:0 auto;">
+            Upload file <b style="color:#f0f0f0;">netflix_titles.csv</b> pada panel kiri, 
+            lalu tekan <b style="color:#E50914;">Jalankan Analisis</b> untuk melihat hasil clustering genre.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    st.stop()
+
+# Load data
 with st.spinner("Memuat dan memproses dataset..."):
-    df_raw = load_and_preprocess()
+    df_raw = load_and_preprocess(uploaded.read())
 
 # Apply content filter
 if content_filter == "Movie":
